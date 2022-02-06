@@ -377,6 +377,8 @@ defmodule Mongo.Ecto.Connection do
     on_conflict = Keyword.get(opts, :on_conflict)
 
     case on_conflict do
+      :raise ->
+        check_constraint_errors(error)
       :nothing ->
         conflict_targets = opts |> Keyword.get(:conflict_target, [])
 
